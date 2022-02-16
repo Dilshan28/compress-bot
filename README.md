@@ -11,7 +11,7 @@ A Telegram Bot To Encode Videos Using FFMPEG.
 
 `Heroku`
 
-[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/snpjames/crazy-compress-bot)
+[![Deploy on Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Dilshan28/compress-bot)
 
 `Railway` 
 

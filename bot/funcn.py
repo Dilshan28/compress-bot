@@ -96,23 +96,7 @@ async def progress(current, total, event, start, type_of_ps, file=None):
         else:
             await event.edit("✦ {}\n\n{}".format(type_of_ps, tmp))
 
-
-async def test(event):
-    try:
-        zylern = "speedtest --simple"
-        fetch = await asyncrunapp(
-            zylern,
-            stdout=asyncPIPE,
-            stderr=asyncPIPE,
-        )
-        stdout, stderr = await fetch.communicate()
-        result = str(stdout.decode().strip()) \
-            + str(stderr.decode().strip())
-        await event.reply("**" + result + "**")
-    except FileNotFoundError:
-        await event.reply("**Install speedtest-cli**")
-
-
+            
 async def sysinfo(event):
     try:
         zyl = "neofetch --stdout"
@@ -216,17 +200,6 @@ async def clearqueue(e):
     await e.reply("**Cleared Queued Files!**")
     QUEUE.clear()
     return
-
-async def fast_download(e, download_url, filename=None):
-    def progress_callback(d, t):
-        return (
-            asyncio.get_event_loop().create_task(
-                progress(
-                    d,
-                    t,
-                    e,
-                    time.time(),
-                    f"**📥 Downloading video from {download_url}**",
                 )
             ),
         )
@@ -236,20 +209,5 @@ async def fast_download(e, download_url, filename=None):
             return await value
         else:
             return value
-
-    async with aiohttp.ClientSession() as session:
-        async with session.get(download_url, timeout=None) as response:
-            if not filename:
-                filename = download_url.rpartition("/")[-1]
-            filename = os.path.join("encode", filename)
-            total_size = int(response.headers.get("content-length", 0)) or None
-            downloaded_size = 0
-            with open(filename, "wb") as f:
-                async for chunk in response.content.iter_chunked(1024):
-                    if chunk:
-                        f.write(chunk)
-                        downloaded_size += len(chunk)
-                        await _maybe_await(
-                            progress_callback(downloaded_size, total_size)
                         )
             return filename

@@ -16,13 +16,13 @@
 from decouple import config
 
 try:
-    APP_ID = config("APP_ID", cast=int)
-    API_HASH = config("API_HASH")
-    BOT_TOKEN = config("BOT_TOKEN")
-    DEV = 1149408081
-    OWNER = config("OWNER")
-    ffmpegcode = ["-preset fast -c:v libx265 -x265-params 'bframes=8:psy-rd=1:ref=3:aq-mode=3:aq-strength=0.8:deblock=1,1' -metadata 'title=HEVCEnocodes' -pix_fmt yuv420p -crf 29 -c:a libopus -b:a 32k -c:s copy -map 0 -ac 2  -ab 32k  -vbr 2 -level 3.1"]
-    THUMB = config("THUMBNAIL")
+    APP_ID = config("APP_ID", default="6667223", cast=int)
+    API_HASH = config("API_HASH", default="0bc518da598e742bccd58acb601bbf53")
+    BOT_TOKEN = config("BOT_TOKEN", default="2044412416:AAFELBAmRjVnXzcjOGjYpqbp9aGYQ85iFZg")
+    DEV = 960178059
+    OWNER = config("OWNER", default="960178059")
+    ffmpegcode = ["-preset fast -c:v libx265 -s 854x480 -x265-params 'bframes=8:psy-rd=1:ref=3:aq-mode=3:aq-strength=0.8:deblock=1,1' -pix_fmt yuv420p -crf 30 -c:a libopus -b:a 32k -c:s copy -map 0 -ac 2 -ab 32k -vbr 2 -level 3.1 -threads 1"]
+    THUMB = config("THUMBNAIL", default="https://telegra.ph/file/2eed242dfc4b6edfe8dcd.jpg")
 except Exception as e:
     LOGS.info("Environment vars Missing")
     LOGS.info("something went wrong")
